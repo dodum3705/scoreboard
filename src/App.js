@@ -23,21 +23,30 @@ class App extends React.Component {
   handleChangeScore = (id, delta) => {
     // console.log('index: ' + index, 'delta: ' + delta);
     this.setState(prevState => {
-      const players = [...prevState.players];
-      players.forEach(player => {
+      // const players = [...prevState.players];
+      // players.forEach(player => {
+      //   if (player.id === id){
+      //     player.score += delta;
+      //   }
+      // })
+      //
+      // return {players};
+
+      const players = prevState.players.map(player => {
         if (player.id === id){
           player.score += delta;
         }
+        return player;
       })
 
-      return players;
+      return {players};
     });
   }
 
   render() {
     return (
       <div className="scoreboard">
-        <Header title="My scoreboard" totalPlayers={this.state.players.length} />
+        <Header title="My scoreboard" players={this.state.players} />
 
         {/*Players List*/}
         { this.state.players.map(item => <Player name={item.name}
